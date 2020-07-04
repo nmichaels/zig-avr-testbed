@@ -1,0 +1,9 @@
+syntax: glob
+
+*.dmp
+*.s
+*.hex
+*.bin
+*.out
+*.elf
+*.o
