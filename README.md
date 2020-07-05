@@ -37,8 +37,13 @@ uses an ISR. The Zig version does not know about interrupts.
 
 A tiny Zig program to blink an LED. It doesn't import any of the avr
 headers, since Zig's translate-c got too confused on the macros. It
-also doesn't know what interrupts are, and I doubt it will any time
-soon.
+also doesn't know what interrupts are.
+
+## intblink.zig
+
+A Zig version of the ISR version of blinker.c. Same constraints as
+blink.zig, but with an interrupt. Weird fact: llvm emits an `sei`
+instruction at the start of the ISR.
 
 ## Makefile
 
@@ -46,9 +51,10 @@ This contains the actual point of this repo. The `zig` command line
 uses Zig's `-femit-asm` switch to spit out avr assembler code. That
 gets fed to GCC's `ld`, which is actually what llvm does to "support"
 AVR. The linker sets up all the interrupt vectors and puts `main` in
-the right place. The linked elf gets passed to `objcopy` to make an
-intel ihex file. This last step is entirely optional, since avrdude
-actually knows how to upload elf files.
+the right place. For the C programs, The linked elf gets passed to
+`objcopy` to make an intel ihex file. This last step is entirely
+optional, since avrdude actually knows how to upload elf files. The
+Zig path doesn't do it.
 
 It also includes the `%.dmp` target, which is essential for knowing
 whether the other steps are working correctly, and debugging them when
