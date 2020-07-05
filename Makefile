@@ -37,6 +37,9 @@ default: $(ALL)
 %.s:: %.c
 	$(CC) $(CFLAGS) -S $<
 
+%.s:: %.zig
+	zig build-obj -femit-asm -fno-emit-bin --strip --release-small -target avr-freestanding-none -mcpu=$(MCU) $<
+
 %.o:: %.zig
 	zig build-obj --strip --release-small -target avr-freestanding-none -mcpu=$(MCU) $<
 

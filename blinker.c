@@ -3,7 +3,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-//#define USE_INTERRUPT
+#define USE_INTERRUPT
 #define GCC
 
 #ifdef GCC
