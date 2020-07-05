@@ -49,6 +49,9 @@ default: $(ALL)
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
 
+upload-%.elf: %.elf
+	$(PROGRAM) -C$(PROGRAM_CFG) -v -V -patmega328p -carduino -P$(PROGRAM_DEV) -b115200 -D -Uflash:w:$<:e
+
 upload-%.hex: %.hex
 	$(PROGRAM) -C$(PROGRAM_CFG) -v -V -patmega328p -carduino -P$(PROGRAM_DEV) -b115200 -D -Uflash:w:$<:i
 
