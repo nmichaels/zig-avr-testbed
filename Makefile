@@ -37,11 +37,8 @@ default: $(ALL)
 %.s:: %.c
 	$(CC) $(CFLAGS) -S $<
 
-%.s:: %.zig
-	zig build-exe -femit-asm -fno-emit-bin --strip --release-small -target avr-freestanding-none -mcpu=$(MCU) $<
-
-%.o: %.s
-	$(AS) $(TARGET) -mno-skip-bug -o $@ $<
+%.o:: %.zig
+	zig build-obj --strip --release-small -target avr-freestanding-none -mcpu=$(MCU) $<
 
 %.elf: %.o
 	$(LD) $(LARCH) -o $@ $(LPATH) $^ $(LIBS)

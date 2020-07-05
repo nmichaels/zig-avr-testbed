@@ -29,6 +29,6 @@ export fn main() noreturn {
     portb.* = led_bit;
     while (true) {
         flipLed();
-        delay(250);
+        delay(100);
     }
 }
