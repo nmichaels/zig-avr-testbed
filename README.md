@@ -1,8 +1,7 @@
 # Zig on AVR
 
 This repo gets a trivial Zig program (blink an LED) working on an
-Arduino Uno (atmega328p). There is much hackery and it probably
-wouldn't work with multiple source files.
+Arduino Uno (atmega328p). There is much hackery.
 
 ## Prerequisites
 
@@ -33,17 +32,21 @@ actual symbol the compiler provides; flip it manually.
 This program is a bit more complicated, since it's got a version that
 uses an ISR. The Zig version does not know about interrupts.
 
+## atmega328p.zig
+
+A place to put constants and functions that would otherwise live in
+avr/io.h and avr/interrupt.h. Zig's translate-c got too confused on
+the actual AVR headers, so here we are.
+
 ## blink.zig
 
-A tiny Zig program to blink an LED. It doesn't import any of the avr
-headers, since Zig's translate-c got too confused on the macros. It
-also doesn't know what interrupts are.
+A tiny Zig program to blink an LED using a delay loop.
 
 ## intblink.zig
 
-A Zig version of the ISR version of blinker.c. Same constraints as
-blink.zig, but with an interrupt. Weird fact: llvm emits an `sei`
-instruction at the start of the ISR.
+A Zig version of the ISR version of blinker.c. Same as blink.zig, but
+with an interrupt. Weird fact: llvm emits an `sei` instruction at the
+start of the ISR.
 
 ## Makefile
 
