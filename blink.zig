@@ -1,4 +1,4 @@
-const std = @import("std.zig");
+const std = @import("std");
 const avr = @import("atmega328p.zig");
 
 const led_pin: u8 = 5;
@@ -14,11 +14,7 @@ fn delay(ms: u8) void {
     while (count < ms) : (count += 1) {
         var loop: u16 = 0;
         while (loop < loop_ms) : (loop += 1) {
-            asm volatile (""
-                :
-                :
-                : "memory"
-            );
+            asm volatile ("" ::: "memory");
         }
     }
 }

@@ -38,10 +38,10 @@ default: $(ALL)
 	$(CC) $(CFLAGS) -S $<
 
 %.s:: %.zig
-	zig build-obj -femit-asm -fno-emit-bin --strip --release-small -target avr-freestanding-none -mcpu=$(MCU) $<
+	zig build-obj -femit-asm -fno-emit-bin --strip -O ReleaseSmall -target avr-freestanding-none -mcpu=$(MCU) $<
 
 %.o:: %.zig
-	zig build-obj --strip --release-small -target avr-freestanding-none -mcpu=$(MCU) $<
+	zig build-obj --strip -O ReleaseSmall -target avr-freestanding-none -mcpu=$(MCU) $<
 
 %.elf: %.o
 	$(LD) $(LARCH) -o $@ $(LPATH) $^ $(LIBS)

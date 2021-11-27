@@ -1,11 +1,11 @@
-const std = @import("std.zig");
+const std = @import("std");
 const avr = @import("atmega328p.zig");
 const led_pin: u8 = 5;
 const loop_ms = 0x0a52;
 const one_second = 63974;
 
-fn bit(comptime b: u3) comptime u8 {
-    return (1 << b);
+fn bit(comptime b: u3) u8 {
+    return comptime (1 << b);
 }
 
 fn flipLed() void {
